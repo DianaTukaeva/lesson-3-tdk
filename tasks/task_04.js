@@ -12,7 +12,12 @@
 * */
 
 function fibonacci(num) {
-
+    let fibonacciArray = [0, 1];
+    if (num === 0 || num === 1) {return fibonacciArray[num]}
+    for (let i = 2; i <= num; i++) {
+        fibonacciArray[i] = fibonacciArray[i - 1] + fibonacciArray[i - 2];
+    }
+    return fibonacciArray[num]
 }
 
 

@@ -36,7 +36,50 @@ A component will not appear at all if its value happens to be zero. Hence, 1 min
 *
 * * */
 function formatDuration (seconds) {
+    if (seconds === 0) return "now";
+    const convertSeconds = {
+        second: 1,
+        minute: 60,
+        hour: 60 * 60,
+        day: 60 * 60 * 24,
+        year: (60 * 60 * 24 * 365),
+    }
+    const convertTimeArray = [];
 
+    function convertTime (time)  {
+        if (seconds >= convertSeconds[time]) {
+            let total = Math.floor(seconds / convertSeconds[time]);
+            if (total > 1) {
+                convertTimeArray.push([total, `${time}s`])
+            } else {
+                convertTimeArray.push([total, `${time}`])
+            }
+            seconds = seconds - convertSeconds[time] * total;
+        }
+    }
+
+    convertTime('year');
+    convertTime('day')
+    convertTime('hour');
+    convertTime('minute')
+    convertTime('second');
+
+    console.log(convertTimeArray);
+
+    let message = '';
+
+    if (convertTimeArray.length >= 3) {
+        for (let i = 0; i < convertTimeArray.length - 2; i++) {
+            message +=`${convertTimeArray[i][0]} ${convertTimeArray[i][1]}, `;
+        }
+    }
+    if (convertTimeArray.length >= 2) {
+        message += `${convertTimeArray[convertTimeArray.length-2][0]} ${convertTimeArray[convertTimeArray.length-2][1]} and ${convertTimeArray[convertTimeArray.length-1][0]} ${convertTimeArray[convertTimeArray.length-1][1]}`
+    } else if (convertTimeArray.length === 1) {
+        message = `${convertTimeArray[0][0]} ${convertTimeArray[0][1]}`
+    }
+
+    return message
 }
 
 

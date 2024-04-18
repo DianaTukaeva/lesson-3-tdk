@@ -4,7 +4,13 @@
 * */
 
 function getVowelsCount(str) {
-
+    const strInArray = str.split('');
+    const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
+    let vowelsQuantity = 0;
+    for (let i = 0; i < strInArray.length; i++) {
+        if (vowels.includes(strInArray[i])) {vowelsQuantity += 1;}
+    }
+    return vowelsQuantity;
 }
 
 

@@ -3,7 +3,11 @@
 * */
 
 function abs(array) {
-
+    let sum = 0;
+    for (let number of array) {
+        sum += number;
+    }
+    return Math.round(sum/ array.length * 10) / 10;
 }
 
 
